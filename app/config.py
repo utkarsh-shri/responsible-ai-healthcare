@@ -11,7 +11,7 @@ from pydantic import field_validator
 class Settings(BaseSettings):
     # Groq
     groq_api_key: str = "gsk_your_groq_api_key_here"
-    groq_model: str = "llama3-70b-8192"
+    groq_model: str = "llama-3.1-8b-instant"
 
     # Supabase
     supabase_url: Optional[str] = None
@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     # App
     app_env: str = "development"
     secret_key: str = "change_me_to_32_char_string"
-    allowed_origins: str = "http://localhost:5173,http://localhost:3000"
+    allowed_origins: str = "http://localhost:5173,http://localhost:3000,https://responsible-ai-healthcare.vercel.app"
 
     # Hallucination guard
     hallucination_samples: int = 3
