@@ -7,9 +7,6 @@ groq==0.9.0
 supabase==2.5.0
 httpx>=0.26,<0.29
 
-# NLP / PII masking — spaCy 3.8+ supports typer>=0.12 (no conflict with fastapi)
-spacy==3.8.2
-
 # Data validation
 pydantic==2.7.1
 pydantic-settings==2.3.0
@@ -22,10 +19,6 @@ numpy==1.26.4
 # Content filtering
 better-profanity==0.7.0
 
-# PII engine
-presidio-analyzer==2.2.354
-presidio-anonymizer==2.2.354
-
 # Rate limiting
 slowapi==0.1.9
 
@@ -33,3 +26,12 @@ slowapi==0.1.9
 pytest==8.2.2
 pytest-cov==5.0.0
 pytest-asyncio==0.23.7
+
+# ---------------------------------------------------------------
+# NOTE: spaCy + Presidio (NLP-based PII) are intentionally
+# excluded here for Render free-tier memory constraints (512MB).
+# Healthcare-specific regex (MRN, NPI, DEA, Member ID, NDC, DOB)
+# provides robust PII masking without the heavy NLP stack.
+# Install locally with: pip install spacy presidio-analyzer
+#   presidio-anonymizer && python -m spacy download en_core_web_sm
+# ---------------------------------------------------------------
