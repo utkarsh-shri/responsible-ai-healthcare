@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: responsible-ai-healthcare-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: >
+      pip install -r requirements.txt &&
+      python -m spacy download en_core_web_sm
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama3-70b-8192
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: APP_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        value: https://responsible-ai-healthcare.vercel.app
+      - key: HALLUCINATION_SAMPLES
+        value: "3"
+      - key: BIAS_DISPARITY_THRESHOLD
+        value: "0.10"
